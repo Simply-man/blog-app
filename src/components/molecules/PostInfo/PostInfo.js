@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Title } from "../../atoms/Title/Title";
 import { StyledData } from "../../atoms/Date/Date";
 import { StyledMessage } from "./PostInfo.styles";
+
 import PropTypes from "prop-types";
 import {
     Wrapper,
@@ -14,12 +15,21 @@ import {
     StyledLabel,
 } from "./PostInfo.styles";
 import { Button } from "../../atoms/Button/Button";
+import { PostContext } from "../../../providers/PostProvider";
 
-const PostInfo = ({ title, date, message }) => {
+const PostInfo = ({ history, title, date, message }) => {
+    const { handleEditShowFormClick } = useContext(PostContext);
+
+    const handleEditClick = (valueHistory) => {
+        handleEditShowFormClick(valueHistory.location.pathname);
+    };
+
     return (
         <>
             <Wrapper>
-                <Button edit>Edit</Button>
+                <Button edit onClick={() => handleEditClick(history)}>
+                    Edit
+                </Button>
                 <StyledLink to="/">Back</StyledLink>
             </Wrapper>
             <Title setMarginAuto fontXl>

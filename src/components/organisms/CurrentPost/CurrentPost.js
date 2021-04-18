@@ -3,7 +3,7 @@ import { PostContext } from "../../../providers/PostProvider";
 import PostInfo from "../../molecules/PostInfo/PostInfo";
 import { Wrapper } from "./CurrentPost.styles";
 
-const CurrentPost = () => {
+const CurrentPost = (props) => {
     const { postView } = useContext(PostContext);
     return (
         <Wrapper>
@@ -13,6 +13,7 @@ const CurrentPost = () => {
                     title={title}
                     date={date}
                     message={message}
+                    {...props}
                 />
             ))}
         </Wrapper>

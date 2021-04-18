@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Wrapper } from "./FullForm.styles";
 import { Button } from "../../atoms/Button/Button";
 import { Title } from "../../atoms/Title/Title";
@@ -12,14 +12,29 @@ const initialValues = {
     message: "",
 };
 
-const FullForm = () => {
+const FullForm = ({ history }) => {
+    const {
+        handleCloseForm,
+        handleAddSubmit,
+        handleEditSubmit,
+        formOptions,
+        fillForm,
+    } = useContext(PostContext);
     const [formValues, setFormValues] = useState(initialValues);
-    const { handleCloseForm, handleAddSubmit } = useContext(PostContext);
+
+    useEffect(() => {
+        if (Object.keys(fillForm).length === 0) return;
+        setFormValues(fillForm);
+    }, [fillForm]);
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
         if (formValues.title === "" || formValues.message === "") return;
-        handleAddSubmit(formValues);
+        if (history.location.pathname === "/") {
+            handleAddSubmit(formValues);
+        } else {
+            handleEditSubmit(formValues);
+        }
         setFormValues(initialValues);
     };
 
@@ -32,12 +47,14 @@ const FullForm = () => {
 
     const handleCloseFormClick = (e) => {
         e.preventDefault();
+        setFormValues(initialValues);
         handleCloseForm(false);
     };
+
     return (
         <Wrapper as="form" method="POST" onSubmit={handleFormSubmit}>
             <Title setMarginAuto tertiary normalStyle>
-                Add new post
+                {formOptions.title}
             </Title>
             <FormField
                 id="Title"
@@ -53,7 +70,7 @@ const FullForm = () => {
                 value={formValues.message}
                 onChange={handleFieldChange}
             />
-            <Button type="submit">Add post</Button>
+            <Button type="submit">{formOptions.buttonText}</Button>
             <Button cancel onClick={handleCloseFormClick}>
                 Cancel
             </Button>

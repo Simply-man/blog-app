@@ -23,7 +23,7 @@ const Dashboard = () => {
                 </Button>
                 <PostsList posts={posts} history={history} />
             </Wrapper>
-            {showForm && <AddPost />}
+            {showForm && <AddPost history={history} />}
         </>
     );
 };

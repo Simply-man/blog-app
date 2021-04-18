@@ -15,10 +15,10 @@ export const Wrapper = styled.div`
     align-items: center;
 `;
 
-const AddPost = () => {
+const AddPost = (props) => {
     return (
         <Wrapper>
-            <FullForm />
+            <FullForm {...props} />
         </Wrapper>
     );
 };

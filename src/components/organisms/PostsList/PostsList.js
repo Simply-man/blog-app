@@ -13,7 +13,7 @@ const PostsList = ({ posts, history }) => {
         <Wrapper>
             {posts.map(({ id, title, date }) => (
                 <PostItem
-                    key={title}
+                    key={id}
                     id={id}
                     title={title}
                     date={date}
