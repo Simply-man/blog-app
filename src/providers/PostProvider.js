@@ -29,7 +29,7 @@ const editFormOptions = {
 };
 
 const PostProvider = ({ children }) => {
-    const [posts, setPosts] = useState(postData || []);
+    const [posts, setPosts] = useState(postData);
     const [postView, setPostView] = useState([]);
     const [showForm, setShowForm] = useState(false);
     const [showEditForm, setShowEditForm] = useState(false);
@@ -43,7 +43,6 @@ const PostProvider = ({ children }) => {
 
     const handleAddSubmit = (values) => {
         setShowForm(false);
-        console.log(posts.length + 1);
         const newPost = {
             id: posts.length + 1,
             title: values.title,
@@ -55,23 +54,26 @@ const PostProvider = ({ children }) => {
     };
 
     const handleEditSubmit = (values) => {
-        setShowEditForm(false);
         const index = posts.findIndex((post) => post.id === values.id);
         posts[index].id = values.id;
         posts[index].title = values.title;
         posts[index].date = values.date;
         posts[index].message = values.message;
+        setShowEditForm(false);
     };
 
     const handleCommentSubmit = (formValue, currentPostId) => {
-        console.log(currentPostId);
         const index = posts.findIndex((post) => post.id === currentPostId);
-        console.log(`Index: ${index}, \n ${posts[index].id}`);
+        const filteredPosts = posts.filter((post) => post.id !== currentPostId);
+        const currentPost = posts[index];
         const newComment = {
             id: posts[index].comments.length + 1,
             content: formValue,
         };
-        posts[index].comments.push(newComment);
+        currentPost.comments.push(newComment);
+        filteredPosts.push(currentPost);
+        const sortedFilteredPosts = filteredPosts.sort((a, b) => a.id - b.id);
+        setPosts([...sortedFilteredPosts]);
     };
 
     const handleShowFormClick = () => {
@@ -82,7 +84,6 @@ const PostProvider = ({ children }) => {
 
     const handleEditShowFormClick = (valueHistory) => {
         const postIdFromRoute = Number(valueHistory.slice(6));
-
         const currentPost = posts.filter((post) => post.id === postIdFromRoute);
         setFillForm(currentPost[0]);
         setFormOptions(editFormOptions);
