@@ -8,8 +8,11 @@ import {
     StyledLink,
     StyledComments,
     StyledInput,
+    StyledCommentSection,
+    StyledComment,
+    StyledButton,
+    StyledLabel,
 } from "./PostInfo.styles";
-import { Label } from "../../atoms/Label/Label";
 import { Button } from "../../atoms/Button/Button";
 
 const PostInfo = ({ title, date, message }) => {
@@ -26,11 +29,12 @@ const PostInfo = ({ title, date, message }) => {
             <StyledMessage>{message}</StyledMessage>
             <StyledComments>
                 <Title secondary>Comment section</Title>
-                <Label htmlFor="Add comment">Add comment</Label>
+                <StyledLabel htmlFor="Add comment">Add comment</StyledLabel>
                 <StyledInput name="Add comment" id="Add comment" />
-                <div style={{ textAlign: "left" }}>
-                    <p>Hello Im comment</p>
-                </div>
+                <StyledCommentSection>
+                    <StyledComment>Comment</StyledComment>
+                    <StyledButton>Reply</StyledButton>
+                </StyledCommentSection>
             </StyledComments>
         </>
     );
