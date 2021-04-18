@@ -8,11 +8,17 @@ export const Wrapper = styled.div`
     padding-top: 2rem;
 `;
 
-const PostsList = ({ posts }) => {
+const PostsList = ({ posts, history }) => {
     return (
         <Wrapper>
-            {posts.map(({ title, date }) => (
-                <PostItem key={title} title={title} date={date} />
+            {posts.map(({ id, title, date }) => (
+                <PostItem
+                    key={title}
+                    id={id}
+                    title={title}
+                    date={date}
+                    history={history}
+                />
             ))}
         </Wrapper>
     );
