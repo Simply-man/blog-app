@@ -15,6 +15,7 @@ export const PostContext = React.createContext({
     handleEditSubmit: () => {},
     deletePost: () => {},
     handleRouteHisotry: () => {},
+    handleCommentSubmit: () => {},
 });
 
 const addFormOptions = {
@@ -28,7 +29,7 @@ const editFormOptions = {
 };
 
 const PostProvider = ({ children }) => {
-    const [posts, setPosts] = useState(postData);
+    const [posts, setPosts] = useState(postData || []);
     const [postView, setPostView] = useState([]);
     const [showForm, setShowForm] = useState(false);
     const [showEditForm, setShowEditForm] = useState(false);
@@ -42,22 +43,35 @@ const PostProvider = ({ children }) => {
 
     const handleAddSubmit = (values) => {
         setShowForm(false);
+        console.log(posts.length + 1);
         const newPost = {
             id: posts.length + 1,
             title: values.title,
             date: values.date,
             message: values.message,
+            comments: [],
         };
         setPosts([newPost, ...posts]);
     };
 
     const handleEditSubmit = (values) => {
         setShowEditForm(false);
-        const index = posts.findIndex((post) => (post.id = values.id));
+        const index = posts.findIndex((post) => post.id === values.id);
         posts[index].id = values.id;
         posts[index].title = values.title;
         posts[index].date = values.date;
         posts[index].message = values.message;
+    };
+
+    const handleCommentSubmit = (formValue, currentPostId) => {
+        console.log(currentPostId);
+        const index = posts.findIndex((post) => post.id === currentPostId);
+        console.log(`Index: ${index}, \n ${posts[index].id}`);
+        const newComment = {
+            id: posts[index].comments.length + 1,
+            content: formValue,
+        };
+        posts[index].comments.push(newComment);
     };
 
     const handleShowFormClick = () => {
@@ -96,6 +110,7 @@ const PostProvider = ({ children }) => {
                 postView,
                 handleShowFormClick,
                 handleEditShowFormClick,
+                handleCommentSubmit,
                 handleCloseForm,
                 handleAddSubmit,
                 handleEditSubmit,

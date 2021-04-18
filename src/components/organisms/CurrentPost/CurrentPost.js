@@ -5,13 +5,16 @@ import { Wrapper } from "./CurrentPost.styles";
 
 const CurrentPost = (props) => {
     const { postView } = useContext(PostContext);
+    console.log("PostView:", postView);
     return (
         <Wrapper>
-            {postView.map(({ title, date, message }) => (
+            {postView.map(({ id, title, date, message, comments }) => (
                 <PostInfo
+                    id={id}
                     key={title}
                     title={title}
                     date={date}
+                    comments={comments}
                     message={message}
                     {...props}
                 />

@@ -71,6 +71,7 @@ export const StyledCommentSection = styled.div`
     border-radius: 3px;
     text-align: left;
     padding: 2rem;
+    margin: 1rem auto;
 `;
 
 export const StyledComment = styled.p``;
@@ -86,3 +87,5 @@ export const StyledButton = styled.button`
         color: ${({ theme }) => theme.colors.error};
     }
 `;
+
+export const FormWrapper = styled.div``;
