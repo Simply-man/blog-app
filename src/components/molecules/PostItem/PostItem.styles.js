@@ -29,8 +29,3 @@ export const StyledLink = styled.a`
         text-decoration: underline;
     }
 `;
-
-export const StyledData = styled.span`
-    fonst-size: 1.1rem;
-    color: grey;
-`;

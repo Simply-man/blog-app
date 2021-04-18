@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 export const Title = styled.h1`
-    font-size: ${({ theme, primary, secondary, tertiary }) =>
+    font-size: ${({ theme, primary, secondary, tertiary, fontXl }) =>
         primary
             ? theme.fontSize.xl3
+            : fontXl
+            ? theme.fontSize.xl
             : secondary
             ? theme.fontSize.md
             : tertiary
