@@ -1,0 +1,30 @@
+export const theme = {
+    colors: {
+        white: "#FFFFFF",
+        lightGrey: "#F7F8FA",
+        grey: "#C0C7D6",
+        darkGrey: "#737C8E",
+        black: "#111111",
+        success: "#8FCB81",
+        error: "#FF6363",
+        warning: "#E1D888",
+        blue: "#0080FF",
+        darkPurple: "#C0C7D6",
+        lightPurple: "#ECEFF7",
+    },
+    fontSize: {
+        xl3: "3.5rem",
+        xl2: "3rem",
+        xl: "2.5rem",
+        lg: "2rem",
+        md: "1.25rem",
+        sm: "1rem",
+    },
+    buttonSize: {
+        xl2: "5rem",
+        xl: "4rem",
+        lg: "3rem",
+        md: "2rem",
+        sm: "1.5rem",
+    },
+};
